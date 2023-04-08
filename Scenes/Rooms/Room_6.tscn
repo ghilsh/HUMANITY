@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Template.tres" type="TileSet" id=2]
+[ext_resource path="res://Scenes/Entities/Bullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Triggers/Checkpoint.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Triggers/Exit.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=6]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 381, 356, 0, 0, 0, 0, 552, 356, 0, 0, 0, 0, 552, 152, 0, 0, 0, 0, 381, 152, 0, 0, 0, 0, 381, 356 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 62.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 63.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 65, 8 )
+
+[node name="Room 6" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 0, -128 )
+tile_set = ExtResource( 2 )
+format = 1
+tile_data = PoolIntArray( 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 2, 0, 262144, 7, 0, 262145, 7, 0, 262146, 7, 0, 262147, 7, 0, 262148, 7, 0, 262150, 5, 0, 327685, 3, 0, 327687, 2, 0, 393221, 3, 0, 393223, 8, 0, 458757, 3, 0, 458758, 5, 0, 524293, 3, 0, 524294, 5, 0, 589828, 0, 0, 589830, 5, 0, 655364, 6, 0, 655366, 5, 0, 720901, 3, 0, 720902, 5, 0, 786437, 3, 0, 786438, 5, 0, 851973, 3, 0, 851974, 5, 0 )
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Left-Right1" type="Path2D" parent="Bullets"]
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Left-Right1"]
+position = Vector2( 552, 339.88 )
+rotation = -1.57081
+offset = 186.234
+
+[node name="Bullet" parent="Bullets/Left-Right1/PathFollow2D" instance=ExtResource( 3 )]
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Bullets/Left-Right1"]
+position = Vector2( 550.908, 153.77 )
+rotation = -2.54714
+offset = 372.468
+
+[node name="Bullet" parent="Bullets/Left-Right1/PathFollow2D2" instance=ExtResource( 3 )]
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Bullets/Left-Right1"]
+position = Vector2( 381, 169.684 )
+rotation = 1.5708
+offset = 558.702
+
+[node name="Bullet" parent="Bullets/Left-Right1/PathFollow2D3" instance=ExtResource( 3 )]
+
+[node name="Left-Right2" type="Path2D" parent="Bullets"]
+position = Vector2( -171, 255 )
+curve = SubResource( 1 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Left-Right2"]
+position = Vector2( 381, 281.453 )
+rotation = 1.57081
+offset = 670.443
+
+[node name="Bullet" parent="Bullets/Left-Right2/PathFollow2D" instance=ExtResource( 3 )]
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="Bullets/Left-Right2"]
+position = Vector2( 439.83, 152 )
+rotation = 3.14159
+offset = 484.209
+
+[node name="Bullet" parent="Bullets/Left-Right2/PathFollow2D2" instance=ExtResource( 3 )]
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="Bullets/Left-Right2"]
+position = Vector2( 492.624, 356 )
+offset = 111.74
+
+[node name="Bullet" parent="Bullets/Left-Right2/PathFollow2D3" instance=ExtResource( 3 )]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 30, 142 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+visible = false
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 768
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.05
+drag_margin_top = 0.05
+drag_margin_right = 0.05
+drag_margin_bottom = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 6 )
+
+[node name="Checkpoint" type="Area2D" parent="."]
+position = Vector2( 312, 181 )
+script = ExtResource( 4 )
+new_spawnpoint = Vector2( 265, 140 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint"]
+position = Vector2( 0, -52.5 )
+shape = SubResource( 2 )
+
+[node name="Exit (Left)" type="Area2D" parent="." groups=["killerfish"]]
+position = Vector2( -10, 74 )
+script = ExtResource( 5 )
+to_scene = "res://Scenes/Rooms/Room_5.tscn"
+spawnpoint = Vector2( 732, 255 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit (Left)"]
+position = Vector2( 0, 53.5 )
+shape = SubResource( 3 )
+
+[node name="Exit (Down)" type="Area2D" parent="."]
+position = Vector2( 380, 780 )
+script = ExtResource( 5 )
+to_scene = "res://Scenes/Rooms/Room_7.tscn"
+spawnpoint = Vector2( 320, 60 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit (Down)"]
+position = Vector2( 4, -4 )
+shape = SubResource( 4 )

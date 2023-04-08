@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mus_main.wav-96002ed02934b192883e50866e9fe635.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/mus_main.wav"
+dest_files=[ "res://.import/mus_main.wav-96002ed02934b192883e50866e9fe635.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

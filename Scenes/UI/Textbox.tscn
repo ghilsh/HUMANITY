@@ -1,0 +1,225 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Fonts/PixeloidSans-nR3g1.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Sounds/snd_text_npc.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scripts/UI/Textbox.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 23
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Pause"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextSound:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -80.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Play"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextSound:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextSound:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -80.0 ]
+}
+
+[node name="Textbox" type="CanvasLayer" groups=["textbox"]]
+pause_mode = 1
+script = ExtResource( 3 )
+
+[node name="TextboxContainer" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = -158.0
+margin_right = -32.0
+margin_bottom = -16.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="TextboxContainer"]
+use_parent_material = true
+margin_right = 576.0
+margin_bottom = 142.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="TextboxContainer"]
+margin_right = 576.0
+margin_bottom = 142.0
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="TextboxContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 568.0
+margin_bottom = 134.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 568.0
+margin_bottom = 134.0
+
+[node name="Start" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+margin_right = 16.0
+margin_bottom = 29.0
+rect_min_size = Vector2( 16, 0 )
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "*"
+
+[node name="Label" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+margin_left = 20.0
+margin_right = 560.0
+margin_bottom = 126.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Dialog Box"
+autowrap = true
+clip_text = true
+
+[node name="Borders" type="Node2D" parent="."]
+visible = false
+
+[node name="Left" type="ColorRect" parent="Borders"]
+margin_left = 32.0
+margin_top = 316.0
+margin_right = 38.0
+margin_bottom = 470.0
+rect_pivot_offset = Vector2( -37, 113 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="ColorRect" parent="Borders"]
+margin_left = 602.0
+margin_top = 316.0
+margin_right = 608.0
+margin_bottom = 470.0
+rect_pivot_offset = Vector2( -37, 113 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Up" type="ColorRect" parent="Borders"]
+margin_left = 26.0
+margin_top = 322.0
+margin_right = 614.0
+margin_bottom = 328.0
+rect_pivot_offset = Vector2( -37, 113 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Down" type="ColorRect" parent="Borders"]
+margin_left = 26.0
+margin_top = 458.0
+margin_right = 614.0
+margin_bottom = 464.0
+rect_pivot_offset = Vector2( -37, 113 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="TextSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -80.0
+
+[node name="TextSoundPlayer" type="AnimationPlayer" parent="."]
+anims/Pause = SubResource( 4 )
+anims/Play = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

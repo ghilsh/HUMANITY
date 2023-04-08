@@ -1,0 +1,174 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Template.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Triggers/Exit.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Entities/Bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Entities/NPC.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/Triggers/Checkpoint.gd" type="Script" id=6]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=7]
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 442, 139, 0, 0, 0, 0, 442, 375, 0, 0, 0, 0, 442, 139 )
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 922, 24, 0, 0, 0, 0, 1131, 24, 0, 0, 0, 0, 922, 24 )
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 65, 8 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 64, 10 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 10, 63 )
+
+[node name="Room 7" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 4, 3, 0, 5, 5, 0, 12, 3, 0, 13, 5, 0, 65540, 3, 0, 65541, 5, 0, 65548, 3, 0, 65549, 5, 0, 131076, 3, 0, 131077, 5, 0, 131084, 3, 0, 131085, 5, 0, 196612, 3, 0, 196614, 1, 0, 196615, 1, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196621, 5, 0, 262148, 6, 0, 262149, 7, 0, 262150, 7, 0, 262151, 7, 0, 262152, 7, 0, 262153, 7, 0, 262154, 7, 0, 262155, 7, 0, 262156, 7, 0, 262157, 8, 0 )
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Up-Down" type="Node2D" parent="Bullets"]
+
+[node name="1" type="Path2D" parent="Bullets/Up-Down"]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Up-Down/1"]
+position = Vector2( 442, 139 )
+rotation = 1.57081
+
+[node name="Bullet" parent="Bullets/Up-Down/1/PathFollow2D" instance=ExtResource( 4 )]
+speed = 350
+wait = 0.25
+
+[node name="2" type="Path2D" parent="Bullets/Up-Down"]
+position = Vector2( 980, 512 )
+rotation = 3.14159
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Up-Down/2"]
+position = Vector2( 442, 139 )
+rotation = 1.57081
+
+[node name="Bullet" parent="Bullets/Up-Down/2/PathFollow2D" instance=ExtResource( 4 )]
+speed = 350
+wait = 0.25
+
+[node name="3" type="Path2D" parent="Bullets/Up-Down"]
+position = Vector2( 200, 0 )
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Up-Down/3"]
+position = Vector2( 442, 139 )
+rotation = 1.57081
+
+[node name="Bullet" parent="Bullets/Up-Down/3/PathFollow2D" instance=ExtResource( 4 )]
+speed = 350
+wait = 0.25
+
+[node name="Left-Right" type="Node2D" parent="Bullets"]
+position = Vector2( -192, 2000 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="1" type="Path2D" parent="Bullets/Left-Right"]
+position = Vector2( -2, 30 )
+curve = SubResource( 4 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Left-Right/1"]
+position = Vector2( 922, 24 )
+
+[node name="Bullet" parent="Bullets/Left-Right/1/PathFollow2D" instance=ExtResource( 4 )]
+speed = 350
+wait = 0.25
+
+[node name="2" type="Path2D" parent="Bullets/Left-Right"]
+position = Vector2( 2051, 151 )
+rotation = -3.14159
+curve = SubResource( 4 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Left-Right/2"]
+position = Vector2( 922, 24 )
+
+[node name="Bullet" parent="Bullets/Left-Right/2/PathFollow2D" instance=ExtResource( 4 )]
+speed = 350
+wait = 0.25
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 789, 278 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+visible = false
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1024
+limit_bottom = 480
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 0.05
+drag_margin_top = 0.05
+drag_margin_right = 0.05
+drag_margin_bottom = 0.05
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 7 )
+
+[node name="NPC" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 870, 305 )
+dialog = "deaths"
+
+[node name="Exit (Down)" type="Area2D" parent="."]
+position = Vector2( 316, -3 )
+script = ExtResource( 3 )
+to_scene = "res://Scenes/Rooms/Room_6.tscn"
+spawnpoint = Vector2( 380, 750 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit (Down)"]
+position = Vector2( 4, -4 )
+shape = SubResource( 1 )
+
+[node name="Exit (Up)" type="Area2D" parent="."]
+position = Vector2( 833, -10 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+to_scene = "res://Scenes/Rooms/Room_8.tscn"
+spawnpoint = Vector2( 324, 460 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit (Up)"]
+position = Vector2( -3, 0 )
+shape = SubResource( 3 )
+
+[node name="Checkpoint (1)" type="Area2D" parent="."]
+position = Vector2( 394, 206 )
+script = ExtResource( 6 )
+new_spawnpoint = Vector2( 320, 260 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint (1)"]
+position = Vector2( 0, 49.5 )
+shape = SubResource( 5 )
+
+[node name="Checkpoint (2)" type="Area2D" parent="."]
+position = Vector2( 758, 203 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+new_spawnpoint = Vector2( 772, 260 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint (2)"]
+position = Vector2( 0, 53 )
+shape = SubResource( 5 )

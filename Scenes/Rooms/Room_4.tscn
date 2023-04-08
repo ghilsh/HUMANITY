@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Template.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Triggers/Exit.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Entities/NPC.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Entities/Bullet.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 144, 145, 0, 0, 0, 0, 144, 388, 0, 0, 0, 0, 144, 144, 0, 0, 0, 0, 146, 147 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 335, 70, 0, 0, 0, 0, 555, 70, 0, 0, 0, 0, 335, 70 )
+}
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 61 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 59.5, 8 )
+
+[node name="Room 4" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 6, 3, 0, 7, 5, 0, 65542, 3, 0, 65543, 5, 0, 131078, 3, 0, 131079, 5, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196615, 5, 0, 262144, 7, 0, 262145, 7, 0, 262146, 7, 0, 262147, 7, 0, 262148, 7, 0, 262149, 7, 0, 262150, 7, 0, 262151, 8, 0 )
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Up-Down" type="Node2D" parent="Bullets"]
+
+[node name="1" type="Path2D" parent="Bullets/Up-Down"]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Up-Down/1"]
+position = Vector2( 144, 145 )
+rotation = 1.5708
+
+[node name="Bullet" parent="Bullets/Up-Down/1/PathFollow2D" instance=ExtResource( 5 )]
+
+[node name="2" type="Path2D" parent="Bullets/Up-Down"]
+position = Vector2( 135, 0 )
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Up-Down/2"]
+position = Vector2( 144, 145 )
+rotation = 1.5708
+
+[node name="Bullet" parent="Bullets/Up-Down/2/PathFollow2D" instance=ExtResource( 5 )]
+
+[node name="Left-Right" type="Path2D" parent="Bullets"]
+position = Vector2( 0, 20 )
+curve = SubResource( 3 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bullets/Left-Right"]
+position = Vector2( 335, 70 )
+rotation = -1.94736e-06
+
+[node name="Bullet" parent="Bullets/Left-Right/PathFollow2D" instance=ExtResource( 5 )]
+speed = 275
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 408, 256 )
+
+[node name="NPC" parent="YSort" instance=ExtResource( 4 )]
+position = Vector2( 478, 296 )
+dialog = "bullets"
+
+[node name="Exit (Left)" type="Area2D" parent="."]
+position = Vector2( -11, 254 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+to_scene = "res://Scenes/Rooms/Room_3.tscn"
+spawnpoint = Vector2( 613, 260 )
+song = "ambience"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit (Left)"]
+position = Vector2( 0, 2 )
+shape = SubResource( 1 )
+
+[node name="Exit (Up)" type="Area2D" parent="."]
+position = Vector2( 447, -9 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+to_scene = "res://Scenes/Rooms/Room_5.tscn"
+spawnpoint = Vector2( 320, 750 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit (Up)"]
+shape = SubResource( 4 )

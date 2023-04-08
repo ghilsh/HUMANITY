@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/snd_text_normal.wav-98bab6eda50c744612da0f69fbfd8dfb.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/snd_text_normal.wav"
+dest_files=[ "res://.import/snd_text_normal.wav-98bab6eda50c744612da0f69fbfd8dfb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=true
+compress/mode=0

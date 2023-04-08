@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Fonts/DeterminationMonoWebRegular-Z5oq.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Rooms/Instructions.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/PixeloidSans-nR3g1.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=9]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_focus = Color( 1, 0.992157, 0.403922, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 5 )
+Button/styles/disabled = null
+Button/styles/focus = SubResource( 8 )
+Button/styles/hover = null
+Button/styles/normal = SubResource( 6 )
+Button/styles/pressed = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 4 )
+
+[node name="Instructions" type="Node2D" groups=["cantpause"]]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Header" type="Label" parent="."]
+margin_right = 641.0
+margin_bottom = 343.0
+custom_fonts/font = SubResource( 1 )
+text = "CONTROLS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 205.0
+margin_right = 640.0
+margin_bottom = 479.0
+mouse_filter = 0
+theme = SubResource( 9 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Movement" type="Label" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 640.0
+margin_bottom = 77.0
+custom_fonts/font = SubResource( 10 )
+text = "MOVEMENT: ARROW KEYS"
+align = 1
+
+[node name="Interact" type="Label" parent="VBoxContainer"]
+margin_top = 81.0
+margin_right = 640.0
+margin_bottom = 106.0
+custom_fonts/font = SubResource( 10 )
+text = "INTERACT: Z/ENTER"
+align = 1
+
+[node name="Cancel" type="Label" parent="VBoxContainer"]
+margin_top = 110.0
+margin_right = 640.0
+margin_bottom = 135.0
+custom_fonts/font = SubResource( 10 )
+text = "CANCEL/SKIP: X/SHIFT"
+align = 1
+
+[node name="Pause" type="Label" parent="VBoxContainer"]
+margin_top = 139.0
+margin_right = 640.0
+margin_bottom = 164.0
+custom_fonts/font = SubResource( 10 )
+text = "PAUSE: ESC"
+align = 1
+
+[node name="Space" type="Label" parent="VBoxContainer"]
+margin_top = 168.0
+margin_right = 640.0
+margin_bottom = 193.0
+custom_fonts/font = SubResource( 10 )
+text = " "
+align = 1
+
+[node name="Continue" type="Label" parent="VBoxContainer"]
+margin_top = 197.0
+margin_right = 640.0
+margin_bottom = 222.0
+custom_fonts/font = SubResource( 10 )
+text = "Press Z to Continue"
+align = 1

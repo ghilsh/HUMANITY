@@ -1,0 +1,141 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Fonts/DeterminationMonoWebRegular-Z5oq.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Rooms/Title.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/snd_select.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Fonts/PixeloidSans-nR3g1.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/Sounds/snd_deny.wav" type="AudioStream" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 75
+outline_color = Color( 0.0666667, 0.0666667, 0.0666667, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=14]
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="Theme" id=4]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_focus = Color( 1, 0.992157, 0.403922, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 10 )
+Button/styles/disabled = null
+Button/styles/focus = SubResource( 11 )
+Button/styles/hover = null
+Button/styles/normal = SubResource( 12 )
+Button/styles/pressed = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 22
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = ExtResource( 4 )
+
+[node name="Title" type="Node2D" groups=["cantpause"]]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ],
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="Title" type="Label" parent="."]
+margin_right = 640.0
+margin_bottom = 396.0
+custom_fonts/font = SubResource( 1 )
+text = "HUMANITY"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Version" type="Label" parent="."]
+margin_left = 602.0
+margin_top = 461.0
+margin_right = 639.0
+margin_bottom = 481.0
+custom_fonts/font = SubResource( 14 )
+text = "V1.0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+anchor_right = 1.0
+margin_top = 146.0
+margin_right = 640.0
+margin_bottom = 480.0
+mouse_filter = 0
+theme = SubResource( 4 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="MainMenu/VBoxContainer" groups=["button"]]
+margin_top = 123.0
+margin_right = 640.0
+margin_bottom = 148.0
+focus_neighbour_top = NodePath("../Quit")
+custom_fonts/font = SubResource( 2 )
+text = "Start"
+
+[node name="Options" type="Button" parent="MainMenu/VBoxContainer" groups=["button"]]
+margin_top = 152.0
+margin_right = 640.0
+margin_bottom = 179.0
+custom_fonts/font = SubResource( 9 )
+text = "Options"
+
+[node name="Quit" type="Button" parent="MainMenu/VBoxContainer" groups=["button"]]
+margin_top = 183.0
+margin_right = 640.0
+margin_bottom = 210.0
+focus_neighbour_bottom = NodePath("../Start")
+custom_fonts/font = SubResource( 3 )
+text = "Quit"
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="DenySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+position = Vector2( 320, 241 )
+current = true
+__meta__ = {
+"_editor_description_": "there's a bug where going back to title during the death animations fucks shit up and this fixes that somehow"
+}
+
+[connection signal="pressed" from="MainMenu/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Images/mysteryman.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 29.1548
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.633987, 1 )
+colors = PoolColorArray( 0.917061, 0.917061, 0.917061, 1, 0.921569, 0.921569, 0.972549, 0 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.261364, 0 ), 0.0, 3.13043, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+gravity = Vector3( 90, 98, 0 )
+initial_velocity_random = 1.0
+damping = 50.0
+color_ramp = SubResource( 4 )
+hue_variation_random = 1.0
+hue_variation_curve = SubResource( 6 )
+
+[node name="Bullet" type="Area2D"]
+__meta__ = {
+"_editor_description_": "Unused."
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 246, 190 )
+amount = 6
+draw_order = 1
+process_material = SubResource( 2 )
+texture = ExtResource( 1 )

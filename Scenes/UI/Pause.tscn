@@ -1,0 +1,160 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scripts/UI/Paused.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Images/temp.PNG" type="Texture" id=2]
+[ext_resource path="res://Scenes/Rooms/Options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Sounds/snd_select.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Fonts/PixeloidSans-nR3g1.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/Sounds/snd_deny.wav" type="AudioStream" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=10]
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=17]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=14]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_focus = Color( 1, 0.992157, 0.403922, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 10 )
+Button/styles/disabled = null
+Button/styles/focus = SubResource( 11 )
+Button/styles/hover = SubResource( 17 )
+Button/styles/normal = SubResource( 12 )
+Button/styles/pressed = SubResource( 13 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 20
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 20
+font_data = ExtResource( 5 )
+
+[node name="Pause" type="CanvasLayer"]
+layer = 128
+
+[node name="Temp" type="Sprite" parent="."]
+visible = false
+position = Vector2( 318, 234.5 )
+scale = Vector2( 1, 0.781942 )
+texture = ExtResource( 2 )
+
+[node name="Paused" type="Control" parent="." groups=["paused"]]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Paused"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 601.0
+margin_bottom = 440.0
+color = Color( 0, 0, 0, 0.592157 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Paused"]
+pause_mode = 2
+margin_right = 641.0
+margin_bottom = 342.0
+custom_fonts/font = SubResource( 1 )
+text = "PAUSED"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PauseMenu" type="VBoxContainer" parent="Paused"]
+pause_mode = 2
+anchor_right = 1.0
+margin_top = 145.0
+margin_right = 600.0
+margin_bottom = 479.0
+mouse_filter = 0
+theme = SubResource( 14 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue" type="Button" parent="Paused/PauseMenu" groups=["button"]]
+pause_mode = 2
+margin_top = 111.0
+margin_right = 640.0
+margin_bottom = 136.0
+focus_neighbour_top = NodePath("../Quit")
+mouse_filter = 2
+custom_fonts/font = SubResource( 15 )
+button_mask = 0
+text = "Continue"
+
+[node name="Options" type="Button" parent="Paused/PauseMenu" groups=["button"]]
+pause_mode = 2
+margin_top = 140.0
+margin_right = 640.0
+margin_bottom = 165.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 15 )
+button_mask = 0
+text = "Options"
+
+[node name="Menu" type="Button" parent="Paused/PauseMenu" groups=["button"]]
+pause_mode = 2
+margin_top = 169.0
+margin_right = 640.0
+margin_bottom = 194.0
+mouse_filter = 2
+custom_fonts/font = SubResource( 15 )
+button_mask = 0
+text = "Go To Menu"
+
+[node name="Quit" type="Button" parent="Paused/PauseMenu" groups=["button"]]
+pause_mode = 2
+margin_top = 198.0
+margin_right = 640.0
+margin_bottom = 223.0
+focus_neighbour_bottom = NodePath("../Continue")
+mouse_filter = 2
+custom_fonts/font = SubResource( 16 )
+button_mask = 0
+text = "Quit"
+
+[node name="Options" parent="Paused" instance=ExtResource( 3 )]
+visible = false
+
+[node name="DenySound" type="AudioStreamPlayer" parent="Paused"]
+stream = ExtResource( 6 )
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[connection signal="pressed" from="Paused/PauseMenu/Continue" to="Paused" method="_on_Continue_pressed"]
+[connection signal="pressed" from="Paused/PauseMenu/Options" to="Paused" method="_on_Options_pressed"]
+[connection signal="pressed" from="Paused/PauseMenu/Menu" to="Paused" method="_on_Menu_pressed"]
+[connection signal="pressed" from="Paused/PauseMenu/Quit" to="Paused" method="_on_Quit_pressed"]

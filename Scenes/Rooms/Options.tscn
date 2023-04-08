@@ -1,0 +1,134 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/Fonts/DeterminationMonoWebRegular-Z5oq.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Rooms/Options.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/snd_select.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Fonts/PixeloidSans-nR3g1.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[sub_resource type="Theme" id=9]
+Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.2 )
+Button/colors/font_color_focus = Color( 1, 0.992157, 0.403922, 1 )
+Button/colors/font_color_hover = Color( 0.94, 0.94, 0.94, 1 )
+Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
+Button/constants/hseparation = 2
+Button/fonts/font = SubResource( 5 )
+Button/styles/disabled = null
+Button/styles/focus = SubResource( 8 )
+Button/styles/hover = null
+Button/styles/normal = SubResource( 6 )
+Button/styles/pressed = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 4 )
+
+[node name="Options" type="Node2D" groups=["cantpause"]]
+script = ExtResource( 2 )
+
+[node name="Header" type="Label" parent="."]
+margin_right = 641.0
+margin_bottom = 343.0
+custom_fonts/font = SubResource( 1 )
+text = "OPTIONS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+anchor_right = 1.0
+margin_top = 145.0
+margin_right = 599.0
+margin_bottom = 479.0
+mouse_filter = 0
+theme = SubResource( 9 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ControlConfig" type="Button" parent="Menu/VBoxContainer" groups=["button"]]
+visible = false
+margin_top = 82.0
+margin_right = 639.0
+margin_bottom = 107.0
+focus_neighbour_top = NodePath("../Back")
+custom_fonts/font = SubResource( 10 )
+text = "Control Config"
+
+[node name="MusicToggle" type="Button" parent="Menu/VBoxContainer" groups=["button"]]
+margin_top = 96.0
+margin_right = 639.0
+margin_bottom = 121.0
+focus_neighbour_top = NodePath("../Back")
+custom_fonts/font = SubResource( 10 )
+text = "Music Toggle"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FullScreenToggle" type="Button" parent="Menu/VBoxContainer" groups=["button"]]
+margin_top = 125.0
+margin_right = 639.0
+margin_bottom = 150.0
+custom_fonts/font = SubResource( 10 )
+text = "Full Screen Toggle"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerToggle" type="Button" parent="Menu/VBoxContainer" groups=["button"]]
+margin_top = 154.0
+margin_right = 639.0
+margin_bottom = 179.0
+custom_fonts/font = SubResource( 10 )
+text = "Timer Toggle"
+
+[node name="PermaDeath" type="Button" parent="Menu/VBoxContainer" groups=["button"]]
+margin_top = 183.0
+margin_right = 639.0
+margin_bottom = 208.0
+custom_fonts/font = SubResource( 10 )
+text = "Perma Death Toggle"
+
+[node name="Back" type="Button" parent="Menu/VBoxContainer" groups=["button"]]
+margin_top = 212.0
+margin_right = 639.0
+margin_bottom = 237.0
+focus_neighbour_bottom = NodePath("../MusicToggle")
+custom_fonts/font = SubResource( 10 )
+text = "Back"
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[connection signal="pressed" from="Menu/VBoxContainer/ControlConfig" to="." method="_on_Control_Config_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/MusicToggle" to="." method="_on_MusicToggle_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/FullScreenToggle" to="." method="_on_FullScreenToggle_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/TimerToggle" to="." method="_on_TimerToggle_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/PermaDeath" to="." method="_on_PermaDeath_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Back" to="." method="_on_Back_pressed"]

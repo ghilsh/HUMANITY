@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/snd_text_npc.wav-7fb071e40df7868f4ad9d2b3ef357683.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/snd_text_npc.wav"
+dest_files=[ "res://.import/snd_text_npc.wav-7fb071e40df7868f4ad9d2b3ef357683.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=false
+edit/loop=true
+compress/mode=0
